@@ -1,15 +1,19 @@
 <div class="sidenav">
-    <span>FTIS</span>
+    <span id="logo">FTIS</span>
     <hr>
-    <a href=""><i class="fa fa-list-alt" style="font-size:70px;"></i><br>Jadwal Ujian</a>
-    <hr>
-    <a href=""><i class="fa fa-download" style="font-size:70px"></i><br>Download Jadwal Ujian</a>
+    <div class="sidenavContent">
+        <a href=""><i class="fa fa-list-alt" style="font-size:70px;"></i><br><br> Jadwal Ujian</a>
+        <hr>
+        <a href=""><i class="fa fa-download" style="font-size:70px"></i><br><br> Download Jadwal Ujian</a>
+        <hr>
+    </div>
+
 </div>
 
 <div class="main">
     <div class="user">
-        <h2 style="display: inline-block;">Rockstar 14</h2>
-        <a href=""><i class="fa fa-sign-out" style="font-size:30px"></i><br>Sign Out</a>
+        <h2 style="display: inline-block;"><?php echo $nama ;?></h2>
+        <a href="logout"><i class="fa fa-sign-out" style="font-size:30px"></i><br>Sign Out</a>
     </div>
     <hr>
     <div class="content">

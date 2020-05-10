@@ -10,7 +10,7 @@
             <span class="contact"><a href="https://www.instagram.com/"><i class="fa fa-instagram" style="font-size:24px"></i></a></span>
             <span class="contact"><a href="https://www.facebook.com/"><i class="fa fa-facebook-square" style="font-size:24px"></i></a></span>
         </div>
-        <div style="margin-bottom: 2%;margin-left: 3%;">
+        <div style="margin-bottom: 1%;margin-left: 3%;">
             <a href="terms">Terms and Service</a>
         </div>
         <div>
