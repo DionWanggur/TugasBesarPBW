@@ -20,6 +20,11 @@
 				$AdmController = new AdminController();
 				echo $AdmController->view_index();
 			break;
+			case $baseURL.'/download':
+				require_once "Controller/userController.php";
+				$AdmController = new UserController();
+				echo $AdmController->download();
+			break;
 			default:
 				echo '404 Not Found';
 				break;

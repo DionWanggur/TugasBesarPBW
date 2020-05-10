@@ -4,7 +4,7 @@
     <div class="sidenavContent">
         <a href=""><i class="fa fa-list-alt" style="font-size:70px;"></i><br><br> Jadwal Ujian</a>
         <hr>
-        <a href=""><i class="fa fa-download" style="font-size:70px"></i><br><br> Download Jadwal Ujian</a>
+        <a href="download"><i class="fa fa-download" style="font-size:70px"></i><br><br> Download Jadwal Ujian</a>
         <hr>
     </div>
 
