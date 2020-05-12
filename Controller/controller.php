@@ -1,11 +1,17 @@
 <?php
 require_once "controller/services/view.php";
+require_once "controller/services/mysqlDB.php";
 
 class Controller{
-    
+	protected $db;
+	
+	public function __construct(){
+		$this->db = new MySQLDB("localhost","root","","tubespbw");
+    }
+
 	public function view_index(){
-		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['nama'])) {
-			$nama = $_SESSION['nama'];
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['username'])) {
+			$nama = $_SESSION['username'];
 			$kondisi = $_SESSION['kondisi'];
 			if ($kondisi == "admin") {
 				$content = "<h1>Layanan Bagi Admin Untuk Mengatur Jadwal Ujian</h1><br>
