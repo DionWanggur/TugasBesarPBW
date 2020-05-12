@@ -15,10 +15,25 @@
 				echo $controller->logout();
 				header('Location: index');
 			break;
+			case $baseURL.'/tambahJadwal':
+				require_once "Controller/adminController.php";
+				$AdmController = new AdminController();
+				echo $AdmController->view_tambahJadwal();
+			break;
 			case $baseURL.'/jadwalBaru':
 				require_once "Controller/adminController.php";
 				$AdmController = new AdminController();
-				echo $AdmController->view_index();
+				echo $AdmController->view_jadwalBaru();
+			break;
+			case $baseURL.'/buatJadwal':
+				require_once "Controller/adminController.php";
+				$AdmController = new AdminController();
+				echo $AdmController->view_buatJadwal();
+			break;
+			case $baseURL.'/tambahMatkul':
+				require_once "Controller/adminController.php";
+				$AdmController = new AdminController();
+				echo $AdmController->view_tambahMatkul();
 			break;
 			case $baseURL.'/download':
 				require_once "Controller/userController.php";
@@ -37,10 +52,6 @@
 				echo $controller->login();
 				header('Location: index');
 				break;
-			case $baseURL.'/admin':
-				require_once "Controller/adminController.php";
-				$AdmController = new AdminController();
-				echo $AdmController->view_index();
 			break;
 			default:
 				echo '404 Not Found';

@@ -7,7 +7,11 @@ class Controller{
 		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['nama'])) {
 			$nama = $_SESSION['nama'];
 			if ($nama == "admin") {
-				return View::createView('adminPage.php',["nama"=>$nama]);
+				$content = "<h1>Layanan Bagi Admin Untuk Mengatur Jadwal Ujian</h1><br>
+				<img src='View/Img/ujian.jpg' alt='ujian' style='width: 400px;height: 200px'>
+				<h2>Selamat Datang ".$nama."</h2>";
+				return View::createView('adminPage.php',["nama"=>$nama,
+				"content"=>$content]);
 			} else {
 				return View::createView('UserPage.php',["nama"=>$nama]);
 			}

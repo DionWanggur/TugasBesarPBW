@@ -44,7 +44,8 @@ form {
   padding: 20px;
 }
 
-input[type=text], input[type=password], input[type=number], select,input[type=file] {
+input[type=text], input[type=password], input[type=number], select,
+input[type=file],input[type=date] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -168,6 +169,7 @@ input[type=button],input[type=submit]{
   border-left: 1px solid white;
   padding-left: 2%;
   text-align: center;
+  margin-bottom: 30%;
 }
 
 #section a{
