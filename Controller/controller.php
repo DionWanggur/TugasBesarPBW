@@ -21,9 +21,12 @@ class Controller{
 				return View::createView('adminPage.php',["nama"=>$nama,
 				"content"=>$content]);
 			} else {
-				$resUTS = $this->getUTS();
-				$resUAS = $this->getUAS();
-				return View::createView('UserPage.php',["resUTS"=>$resUTS, "resUAS"=>$resUAS,"nama"=>$nama]);
+				$content = "<h1>Layanan Bagi Mahasiswa untuk Melihat Jadwal Ujian</h1><br>
+				<img src='View/Img/ujian.jpg' alt='ujian' style='width: 400px;height: 200px'>
+				<h2>Selamat Datang ".$nama."</h2>";
+				// $resUTS = $this->getUTS();
+				// $resUAS = $this->getUAS();
+				return View::createView('UserPage.php',["nama"=>$nama,"content"=>$content]);
 			}
 		}
 		else{
@@ -55,6 +58,7 @@ class Controller{
 		return $kondisi;
 		
 	}
+
 	public function logout(){
 		session_destroy();
 	}

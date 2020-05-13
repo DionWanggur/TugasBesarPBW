@@ -8,5 +8,4 @@
         <input type="file" name="fileeksel">
         <input type="submit" value="Upload" name="submit">
     </form>
-    <?php echo $_SESSION['berhasil']?>
 </div>

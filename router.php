@@ -1,6 +1,6 @@
 <?php
 	$url = $_SERVER['REDIRECT_URL'];
-	$baseURL = '/TugasBesarPBW';
+	$baseURL = '/TugasPhpPbw/Praktikum/TugasBesarPBW';
 	session_start();
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		switch ($url) {
@@ -20,6 +20,26 @@
 				$AdmController = new AdminController();
 				echo $AdmController->view_tambahJadwal();
 			break;
+			case $baseURL.'/liatJadwal':
+				require_once "Controller/userController.php";
+				$Usrcontroller = new UserController();
+				echo $Usrcontroller->view_liatJadwal();
+			break;
+			case $baseURL.'/downloadJadwal':
+				require_once "Controller/userController.php";
+				$Usrcontroller = new UserController();
+				echo $Usrcontroller->view_download();
+			break;
+			case $baseURL.'/jadwalUTS':
+				require_once "Controller/userController.php";
+				$Usrcontroller = new UserController();
+				echo $Usrcontroller->view_UTS();
+			break;
+			case $baseURL.'/jadwalUAS':
+				require_once "Controller/userController.php";
+				$Usrcontroller = new UserController();
+				echo $Usrcontroller->view_UAS();
+			break;
 			case $baseURL.'/jadwalBaru':
 				require_once "Controller/adminController.php";
 				$AdmController = new AdminController();
@@ -36,10 +56,15 @@
 				echo $AdmController->tambahMatkul();
 				header('Location: buatJadwal');
 			break;
-			case $baseURL.'/download':
+			case $baseURL.'/downloadUTS':
 				require_once "Controller/userController.php";
 				$AdmController = new UserController();
-				echo $AdmController->download();
+				echo $AdmController->downloadUTS();
+			break;
+			case $baseURL.'/downloadUAS':
+				require_once "Controller/userController.php";
+				$AdmController = new UserController();
+				echo $AdmController->downloadUAS();
 			break;
 			default:
 				echo '404 Not Found';
@@ -53,18 +78,6 @@
 				echo $controller->login();
 				header('Location: index');
 				break;
-			case $baseURL.'/buatJadwal':
-				require_once "Controller/adminController.php";
-				$controller = new AdminController();
-				echo $controller->tipeUjian();
-				header('Location: buatJadwal');
-			break;
-			case $baseURL.'/fileUpload':
-				require_once "Controller/adminController.php";
-				$controller = new AdminController();
-				$controller->uploadEksel();
-				header('Location: index');
-			break;
 			case $baseURL.'/tambahMatkul':
 				require_once "Controller/adminController.php";
 				$controller = new AdminController();
@@ -76,6 +89,12 @@
 					header('Location: buatJadwal');
 				}
 				break;
+			case $baseURL.'/fileUpload':
+				require_once "Controller/adminController.php";
+				$controller = new AdminController();
+				$controller->uploadEksel();
+				header('Location: index');
+			break;
 			default:
 				echo '404 Not Found';
 				break;

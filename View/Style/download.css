@@ -1,0 +1,10 @@
+table{
+    text-align: center;
+    border: 1px solid black;
+}
+tr{
+    border: 1px solid black;
+}
+tr:nth-child(odd){
+    background-color: lightgrey;
+}

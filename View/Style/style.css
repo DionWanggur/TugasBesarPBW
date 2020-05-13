@@ -133,6 +133,19 @@ input[type=button],input[type=submit]{
   background-image: linear-gradient( rgb(66, 151, 197), rgb(16, 185, 190));
 }
 
+#liatJadwal {
+  height: 400px;
+  position: relative;
+  text-align: center;
+  background-image: linear-gradient( rgb(66, 151, 197), rgb(16, 185, 190));
+}
+
+#liatJadwal a {
+  text-decoration: none;
+  color: rgba(5, 5, 5, 0.774);
+  font-size: larger;
+}
+
 #tambahJadwal a {
   text-decoration: none;
   color: rgba(5, 5, 5, 0.774);
@@ -144,7 +157,7 @@ input[type=button],input[type=submit]{
   font-size: larger;
 }
 
-#tambahJadwal a:hover{
+#tambahJadwal a:hover,#liatJadwal a:hover{
   color: white;
 }
 .user a {
@@ -192,6 +205,21 @@ table th {
   padding-bottom: 12px;
   text-align: center;
   background-color: rgb(66, 71, 66, 0.8);
+  color: white;
+}
+.pageLink{
+  text-decoration: none;
+	border: 2px solid teal;
+	background: white;
+	color: teal;
+	padding: 6px;
+}
+
+.pageLink:hover{
+  color: white;
+	background: teal;
+}
+ a:active{
   color: white;
 }
 
