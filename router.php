@@ -9,6 +9,11 @@
 				$controller = new Controller();
 				echo $controller->view_index();
 				break;
+			case $baseURL.'/indexuser':
+				require_once "Controller/userController.php";
+				$controller = new UserController();
+				echo $controller->view_index();
+				break;
 			case $baseURL.'/logout':
 				require_once "Controller/controller.php";
 				$controller = new Controller();
@@ -51,7 +56,7 @@
 				require_once "Controller/controller.php";
 				$controller = new Controller();
 				echo $controller->login();
-				header('Location: index');
+				header('Location: indexuser');
 				break;
 			case $baseURL.'/buatJadwal':
 				require_once "Controller/adminController.php";
