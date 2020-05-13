@@ -1,16 +1,22 @@
 <div class="content" style="width: 100%;display: inline-block;">
-    <h2>Ambil Judul</h2>
+    <h2><?php echo $judul;?></h2>
     <form action="tambahMatkul" method="get">
         <label for="mulai"><strong>Mulai</strong></label>
-        <input type="datetime-local" name="mulai" placeholder="YYYY/MM/DD" style="width: 25%; margin-right:2%;"required>
+        <input type="datetime-local" name="mulai" placeholder="YYYY/MM/DD" style="width: 25%; margin-right:2%;">
         <label for="selesai"><strong>Selesai</strong></label>
-        <input type="datetime-local" name="selesai" placeholder="YYYY/MM/DD" style="width: 25%" required>
+        <input type="datetime-local" name="selesai" placeholder="YYYY/MM/DD" style="width: 25%" >
+        <label ><strong>Jumlah Pengawas</strong></label>
+        <input type="number" name="jumlahPengawas"  style="width: 10%" min="1" max="10" >
+        <label ><strong>Shift</strong></label>
+        <input type="number" name="shift"  style="width: 10%" min="1" max="3" >
         <br>
         <label for="mataKuliahUjian"><strong>Pilih Mata Kuliah</strong></label>
         <select name="mataKuliahUjian" id="">
-            <option value="">ASD</option>
-            <option value="">DAA</option>
-            <option value="">PBO</option>
+            <?php
+                foreach($matkul as $key => $row){
+                    echo "<option value = '. $row->nama.'>" . $row->nama. "</option>";
+                }
+            ?>
         </select><br>
         <label for="tataCara"><strong>Tata Cara</strong></label>
         <select name="tataCara" id="">
@@ -23,13 +29,15 @@
         </select><br>
         <label for="ruang">Ruang</label>
         <select name="ruang" id="">
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
+            <?php
+                foreach($ruang as $key => $row){
+                    echo "<option value = '. $row->nama.'>" . $row->nama." Kapasitas = ".$row->kapasitas."</option>";
+                }
+            ?>
         </select><br>
-        <input type="button" value="Tambahkan" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;">
+        <input type="submit" value="Tambahkan" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;">
         <input type="button" value="Cancel" style="background-color: rgba(240, 6, 6, 0.836);" onclick="cancaled()">
-        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); float:right">
+        <input type="button" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); float:right">
     </form>
 </div>
 

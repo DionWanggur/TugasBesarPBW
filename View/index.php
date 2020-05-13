@@ -3,7 +3,7 @@
     <hr>
 </div>
 <div style="text-align: center">
-    <img src="View/Img/ujian.jpg" alt="ujian">
+    <img src="View/Img/ujian.jpg" alt="ujian" style="width: 500px">
 
     <form action="login" method="post" style="float:right">
         <label for="Username"><strong>Username</strong></label>

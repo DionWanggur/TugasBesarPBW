@@ -1,6 +1,6 @@
 <?php
 	$url = $_SERVER['REDIRECT_URL'];
-	$baseURL = '/TugasPhpPbw/Praktikum/TugasBesarPBW';
+	$baseURL = '/TugasPhpPbw/Praktikum/TugasBesar';
 	session_start();
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		switch ($url) {
@@ -33,7 +33,7 @@
 			case $baseURL.'/tambahMatkul':
 				require_once "Controller/adminController.php";
 				$AdmController = new AdminController();
-				echo $AdmController->view_tambahMatkul();
+				echo $AdmController->tambahMatkul();
 			break;
 			case $baseURL.'/download':
 				require_once "Controller/userController.php";

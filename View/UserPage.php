@@ -12,10 +12,15 @@
 
 <div class="main">
     <div class="user">
-        <h2 style="display: inline-block;"><?php echo $nama ;?></h2>
+        <h2 style="display: inline-block;"><?php echo $nama; ?></h2>
         <a href="logout"><i class="fa fa-sign-out" style="font-size:30px"></i><br>Sign Out</a>
     </div>
     <hr>
+    <form method="GET" action="users.php" style="margin-bottom: 2%;">
+        <legend>Search by Mata Kuliah</legend>
+        <input type="text" name="filter" value="" style="width: 40%">
+        <input type="submit" value="SEARCH">
+    </form>
     <div class="content">
         <table>
             <tr>
