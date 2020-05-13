@@ -2,9 +2,9 @@
     <h2>Ambil Judul</h2>
     <form action="tambahMatkul" method="get">
         <label for="mulai"><strong>Mulai</strong></label>
-        <input type="datetime-local" name="mulai" placeholder="YYYY/MM/DD" required>
+        <input type="datetime-local" name="mulai" placeholder="YYYY/MM/DD" style="width: 25%; margin-right:2%;"required>
         <label for="selesai"><strong>Selesai</strong></label>
-        <input type="datetime-local" name="selesai" placeholder="YYYY/MM/DD" required>
+        <input type="datetime-local" name="selesai" placeholder="YYYY/MM/DD" style="width: 25%" required>
         <br>
         <label for="mataKuliahUjian"><strong>Pilih Mata Kuliah</strong></label>
         <select name="mataKuliahUjian" id="">
@@ -27,9 +27,16 @@
             <option value="">2</option>
             <option value="">3</option>
         </select><br>
-        <input type="button" value="Tambahkan" style="background-color: rgba(12, 158, 12, 0.87);">
-        <input type="button" value="Cancel" style="float: right; background-color: rgba(240, 6, 6, 0.836);">
-        <br><br>
-        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87);">
+        <input type="button" value="Tambahkan" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;">
+        <input type="button" value="Cancel" style="background-color: rgba(240, 6, 6, 0.836);" onclick="cancaled()">
+        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); float:right">
     </form>
 </div>
+
+<script>
+    function cancaled() {
+        if (confirm("Anda Yakin Untuk Membatalkan Pengisisan Form ?")) {
+            window.location.href='index';
+        }
+    }
+</script>

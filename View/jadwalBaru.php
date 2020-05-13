@@ -13,7 +13,7 @@
             <option value="genap">GENAP</option>
         </select><br>
         <input type="submit" value="Next >>" style="background-color: rgba(12, 158, 12, 0.87);">
-        <input type="button" value="Cancel" style="float: right; background-color: rgba(240, 6, 6, 0.836);">
+        <input type="button" value="Cancel" style="float: right; background-color: rgba(240, 6, 6, 0.836);" onclick="cancaled()">
     </form>
 </div>
 <div id="section">
@@ -25,3 +25,11 @@
     </form>
 
 </div>
+
+<script>
+    function cancaled() {
+        if (confirm("Anda Yakin Untuk Membatalkan Pengisisan Form ?")) {
+            window.location.href='index';
+        }
+    }
+</script>
