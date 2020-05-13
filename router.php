@@ -9,11 +9,6 @@
 				$controller = new Controller();
 				echo $controller->view_index();
 				break;
-			case $baseURL.'/indexuser':
-				require_once "Controller/userController.php";
-				$controller = new UserController();
-				echo $controller->view_index();
-				break;
 			case $baseURL.'/logout':
 				require_once "Controller/controller.php";
 				$controller = new Controller();
@@ -56,13 +51,19 @@
 				require_once "Controller/controller.php";
 				$controller = new Controller();
 				echo $controller->login();
-				header('Location: indexuser');
+				header('Location: index');
 				break;
 			case $baseURL.'/buatJadwal':
 				require_once "Controller/adminController.php";
 				$controller = new AdminController();
 				echo $controller->tipeUjian();
 				header('Location: buatJadwal');
+			break;
+			case $baseURL.'/fileUpload':
+				require_once "Controller/adminController.php";
+				$controller = new AdminController();
+				$controller->uploadEksel();
+				header('Location: index');
 			break;
 			case $baseURL.'/tambahMatkul':
 				require_once "Controller/adminController.php";

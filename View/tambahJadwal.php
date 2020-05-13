@@ -5,8 +5,8 @@
     <h3>kamu bisa menambahkan jadwal ujian yang sudah ada dari perangkat, import file .xls dari perangkat</h3>
     <form id="formUpload" method="POST" action="fileUpload" enctype="multipart/form-data">
         <i class="fa fa-upload" style="font-size:50px"></i><br><br>
-        <input type="file" name="file">
+        <input type="file" name="fileeksel">
         <input type="submit" value="Upload" name="submit">
     </form>
-
+    <?php echo $_SESSION['berhasil']?>
 </div>
