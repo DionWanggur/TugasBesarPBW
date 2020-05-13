@@ -50,11 +50,17 @@ class AdminController{
 		}
 		$matkul = $this->getAllMataKuliah();
 		$ruang = $this->getAllRuang();
+		if(isset($_SESSION['status']) && !empty($_SESSION['status'])) {
+			$status = $_SESSION['status'];
+		}
+		else{
+			$status = null;
+		}
 		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['nama'])) {
 			$nama = $_SESSION['nama'];
 			if ($_SESSION['kondisi'] == "admin") {
 				$content = View::createView('buatJadwal.php',["nama"=>$nama,"matkul"=> $matkul,
-				"ruang"=>$ruang
+				"ruang"=>$ruang,"status"=>$status
 				]);
 				return $this->view_index($content);
 			}
@@ -117,6 +123,45 @@ class AdminController{
 			}
 		}
 		return $result;
+	}
+
+	public function insertUjian(){
+		$mulai = new DateTime($_POST['mulai']);
+		$resMulai = $mulai->format("Y-m-d H:i:s");
+
+		$selesai = new DateTime($_POST['selesai']);
+		$resSelesai = $selesai->format("Y-m-d H:i:s");
+
+		$matkul = $_POST['mataKuliahUjian'];
+		$tatacara = $_POST['tataCara'];
+		$ruang = $_POST['ruang'];
+		$tipe = $_SESSION['tipeUjian'];
+		$shift = $_POST['shift'];
+		$jumPengawas = $_POST['jumlahPengawas'];
+
+		$_SESSION['status'] = "";
+		$status = "";
+
+
+		$queryCek = "SELECT ruang,mulai,selesai	 FROM ujian WHERE ruang LIKE '$ruang' AND mulai LIKE '$resMulai' AND selesai LIKE '$resSelesai'";
+		$queryCek_result = $this->db->executeSelectQuery($queryCek);
+		if($queryCek_result[0]['ruang']==null){
+			$query = "SELECT mengajar.id FROM matakuliah inner join mengajar on matakuliah.kode = mengajar.kode WHERE matakuliah.nama LIKE '$matkul'";
+			$query_result = $this->db->executeSelectQuery($query);
+			foreach($query_result as $key => $value){
+				$id = $value['id'];
+				$queryInsert = "INSERT INTO ujian (mengajar_id,tipe,tata_cara,mulai,selesai,ruang,shift,kebutuhan_pengawas) 
+					values ('$id','$tipe','$tatacara','$resMulai','$resSelesai','$ruang','$shift','$jumPengawas')";
+				$queryInsert_result = $this->db->executeNonSelectQuery($queryInsert);
+			}
+			$_SESSION['status'] = "berhasil";
+			$status = "berhasil";
+		}
+		else{
+			$_SESSION['status'] = "bentrok";
+			$status = "bentrok";
+		}
+		
 	}
 }
 

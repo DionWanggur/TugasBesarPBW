@@ -53,7 +53,18 @@
 				echo $controller->login();
 				header('Location: index');
 				break;
-			break;
+			case $baseURL.'/buatJadwal':
+				require_once "Controller/adminController.php";
+				$controller = new AdminController();
+				echo $controller->tipeUjian();
+				header('Location: buatJadwal');
+				break;
+			case $baseURL.'/tambahMatkul':
+				require_once "Controller/adminController.php";
+				$controller = new AdminController();
+				$controller->insertUjian();
+				header('Location: index');
+				break;
 			default:
 				echo '404 Not Found';
 				break;

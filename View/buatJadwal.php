@@ -1,6 +1,6 @@
 <div class="content" style="width: 100%;display: inline-block;">
     <h2>Tambahkan Mata Kuliah Pada Jadwal Yang Anda Buat !</h2>
-    <form action="tambahMatkul" method="get">
+    <form action="tambahMatkul" method="POST">
         <label for="mulai"><strong>Mulai</strong></label>
         <input type="datetime-local" name="mulai" placeholder="YYYY/MM/DD" style="width: 25%; margin-right:2%;">
         <label for="selesai"><strong>Selesai</strong></label>
@@ -35,7 +35,7 @@
                 }
             ?>
         </select><br>
-        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;">
+        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;"onclick="validasi()">
         <input type="button" value="Cancel" style="background-color: rgba(240, 6, 6, 0.836);float:right" onclick="cancaled()">
     </form>
 </div>
@@ -45,5 +45,15 @@
         if (confirm("Anda Yakin Untuk Membatalkan Pengisisan Form ?")) {
             window.location.href='index';
         }
+    }
+    function validasi(){
+        <?php
+            if($status == "bentrok"){
+                $message = "jadwal masih bentrok";
+                echo"alert('$message');
+                event.preventDefault();";
+                
+            }
+        ?>
     }
 </script>
