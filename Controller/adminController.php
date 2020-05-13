@@ -14,7 +14,7 @@ class AdminController{
     }
 
 	public function view_index($content){
-		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['nama'])) {
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
 			$nama = $_SESSION['nama'];
 			if ($_SESSION['kondisi'] == "admin") {
 				return View::createView('adminPage.php',["nama"=>$nama,
@@ -24,7 +24,7 @@ class AdminController{
 	}
 	public function view_jadwalBaru(){
 		$semester = $this->getSemester();
-		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['nama'])) {
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
 			$nama = $_SESSION['nama'];
 			if ($_SESSION['kondisi'] == "admin") {
 				$content =  View::createView('jadwalBaru.php',["nama"=>$nama,"semester"=>$semester]);
@@ -45,7 +45,7 @@ class AdminController{
 	}
 	
 	public function view_buatJadwal(){
-		if (isset($_GET['tipeUjian']) and $_GET['tipeUjian'] != "") {
+		if (isset($_GET['tipeUjian']) && $_GET['tipeUjian'] != "") {
 			$_SESSION['tipeUjian'] = $_GET['tipeUjian'];
 		}
 		$matkul = $this->getAllMataKuliah();
@@ -56,7 +56,7 @@ class AdminController{
 		else{
 			$status = null;
 		}
-		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['nama'])) {
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
 			$nama = $_SESSION['nama'];
 			if ($_SESSION['kondisi'] == "admin") {
 				$content = View::createView('buatJadwal.php',["nama"=>$nama,"matkul"=> $matkul,
@@ -68,7 +68,7 @@ class AdminController{
 	}
 
 	public function tambahMatkul(){
-		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['tipeUjian'])) {
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['tipeUjian'])) {
 			$mulai = $_GET['mulai'];
 			$selesai = $_GET['selesai'];
 			$mataKuliah = $_GET['mataKuliahUjian'];
@@ -143,7 +143,7 @@ class AdminController{
 		$status = "";
 
 
-		$queryCek = "SELECT ruang,mulai,selesai	 FROM ujian WHERE ruang LIKE '$ruang' AND mulai LIKE '$resMulai' AND selesai LIKE '$resSelesai'";
+		$queryCek = "SELECT ruang FROM ujian WHERE ruang LIKE '$ruang' AND mulai LIKE '$resMulai' AND selesai LIKE '$resSelesai'";
 		$queryCek_result = $this->db->executeSelectQuery($queryCek);
 		if($queryCek_result[0]['ruang']==null){
 			$query = "SELECT mengajar.id FROM matakuliah inner join mengajar on matakuliah.kode = mengajar.kode WHERE matakuliah.nama LIKE '$matkul'";
@@ -161,6 +161,7 @@ class AdminController{
 			$_SESSION['status'] = "bentrok";
 			$status = "bentrok";
 		}
+		return $status;
 		
 	}
 }

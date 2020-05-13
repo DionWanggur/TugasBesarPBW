@@ -1,11 +1,23 @@
 <?php
 require_once "controller/services/view.php";
+require_once "controller/services/mysqlDB.php";
 require_once 'vendor/autoload.php';
+require_once 'model/ujian.php';
 
 class UserController{
+	protected $db;
+	
+	public function __construct(){
+		$this->db = new MySQLDB("localhost","root","","ftisakademik");
+    }
     
 	public function view_index(){
-		return View::createView('UserPage.php',[]);
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
+			$nama = $_SESSION['nama'];
+		}
+		$resUTS = $this->getUTS();
+		$resUAS = $this->getUAS();
+		return View::createView('UserPage.php',["resUTS"=>$resUTS, "resUAS"=>$resUAS,"nama"=>$nama]);
 	}
 	
 	public function download()
@@ -26,6 +38,7 @@ class UserController{
 	</table>');
 		$mpdf->Output();
 	}
+
 }
 
 ?>
