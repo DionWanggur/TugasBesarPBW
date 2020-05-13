@@ -1,4 +1,4 @@
-<form action="" method="post">
+<!-- <form action="" method="post">
     <label for="mataKuliahUjian"><strong>Pilih Mata Kuliah</strong></label>
     <select name="mataKuliahUjian" id="" required>
         <option value="">ASD</option>
@@ -18,4 +18,4 @@
     <label for="ruang">Ruang</label>
     <input type="text" name="ruang" id="" style="width: 20%;margin-right: 5%;">
     <input type="button" value="Tambahkan" style="background-color: rgba(12, 158, 12, 0.87);">
-</form>
+</form> -->

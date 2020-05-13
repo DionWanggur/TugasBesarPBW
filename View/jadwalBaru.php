@@ -7,9 +7,6 @@
             <option value="UTS">UTS</option>
             <option value="UAS">UAS</option>
         </select><br>
-        <label for="sceaduleType"><strong>Hari</strong></label><br>
-        <input type="number" name="jumlahHari" placeholder="Jumlah Hari dalam Ujian" id="" min="1" max="31">
-        <br>
         <label for="semester"><strong>Semester</strong></label><br>
         <select name="semester" id="">
             <option value="ganjil">GANJIL</option>

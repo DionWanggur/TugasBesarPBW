@@ -9,7 +9,7 @@
         <label for="Username"><strong>Username</strong></label>
         <input type="text" id="Uname" name="nama" placeholder="username" required>
         <label for="password"><strong>Password</strong> </label>
-        <input type="password" id="Pass" name="lastname" placeholder="password" required>
+        <input type="password" id="Pass" name="password" placeholder="password" required>
         <input type="submit" value="Submit" style="background-color: #4CAF50">
     </form>
 
