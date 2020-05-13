@@ -102,8 +102,14 @@
 			case $baseURL.'/fileUpload':
 				require_once "Controller/adminController.php";
 				$controller = new AdminController();
-				$controller->uploadEksel();
-				header('Location: index');
+				 $sukses = $controller->uploadEksel();
+				if($sukses == "berhasil"){
+					header('Location: index');
+				}
+				else{
+					$message = "Eror :Upload Gagal";
+					echo "<script type='text/javascript'>alert('$message');</script>";
+				}
 			break;
 			case $baseURL.'/deleteBook':
 				require_once "Controller/adminController.php";
