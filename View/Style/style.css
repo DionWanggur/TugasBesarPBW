@@ -45,7 +45,7 @@ form {
 }
 
 input[type=text], input[type=password], input[type=number], select,
-input[type=file],input[type=date] {
+input[type=file],input[type=datetime-local] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
