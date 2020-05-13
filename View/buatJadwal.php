@@ -14,7 +14,7 @@
         <select name="mataKuliahUjian" id="">
             <?php
                 foreach($matkul as $key => $row){
-                    echo "<option value = '. $row->nama.'>" . $row->nama. "</option>";
+                    echo "<option value = '". $row->nama."'>" . $row->nama. "</option>";
                 }
             ?>
         </select><br>
@@ -31,11 +31,11 @@
         <select name="ruang" id="">
             <?php
                 foreach($ruang as $key => $row){
-                    echo "<option value = '. $row->nama.'>" . $row->nama." Kapasitas = ".$row->kapasitas."</option>";
+                    echo "<option value = '". $row->nama."'>" . $row->nama." Kapasitas = ".$row->kapasitas."</option>";
                 }
             ?>
         </select><br>
-        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;"onclick="validasi()">
+        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;">
         <input type="button" value="Cancel" style="background-color: rgba(240, 6, 6, 0.836);float:right" onclick="cancaled()">
     </form>
 </div>
@@ -46,14 +46,5 @@
             window.location.href='index';
         }
     }
-    function validasi(){
-        <?php
-            if($status == "bentrok"){
-                $message = "jadwal masih bentrok";
-                echo"alert('$message');
-                event.preventDefault();";
-                
-            }
-        ?>
-    }
+    
 </script>
