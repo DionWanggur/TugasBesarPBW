@@ -34,6 +34,7 @@
 				require_once "Controller/adminController.php";
 				$AdmController = new AdminController();
 				echo $AdmController->tambahMatkul();
+				header('Location: buatJadwal');
 			break;
 			case $baseURL.'/download':
 				require_once "Controller/userController.php";

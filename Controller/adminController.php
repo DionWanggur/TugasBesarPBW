@@ -45,20 +45,16 @@ class AdminController{
 	}
 	
 	public function view_buatJadwal(){
-		if (isset($_GET['sceaduleTitle']) and isset($_GET['tipeUjian']) and $_GET['tipeUjian'] !=" ") {
-			$judul = $_GET['sceaduleTitle'];
+		if (isset($_GET['tipeUjian']) and $_GET['tipeUjian'] != "") {
 			$_SESSION['tipeUjian'] = $_GET['tipeUjian'];
 		}
 		$matkul = $this->getAllMataKuliah();
 		$ruang = $this->getAllRuang();
 		if(session_status() == PHP_SESSION_ACTIVE and isset($_SESSION['nama'])) {
 			$nama = $_SESSION['nama'];
-			$tipeJadwal = $_SESSION['tipeUjian'];
-			$judul .= " ( " .$tipeJadwal. " )";
 			if ($_SESSION['kondisi'] == "admin") {
 				$content = View::createView('buatJadwal.php',["nama"=>$nama,"matkul"=> $matkul,
-				"ruang"=>$ruang,
-				"judul"=>$judul
+				"ruang"=>$ruang
 				]);
 				return $this->view_index($content);
 			}

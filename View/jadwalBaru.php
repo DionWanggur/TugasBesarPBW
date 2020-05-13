@@ -1,7 +1,6 @@
 <div class="content" style="width: 70%;display: inline-block;">
+<h2>Masukan Tipe Ujian Untuk Jadwal Baru !</h2>
     <form action="buatJadwal" method="get">
-        <label for="sceaduleTitle"><strong>Judul Jadwal</strong></label>
-        <input type="text" name="sceaduleTitle" placeholder="Title">
         <label for="sceaduleType"><strong>Tipe Jadwal</strong></label><br>
         <select name="tipeUjian" id="" required>
             <option value="UTS">UTS</option>

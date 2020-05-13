@@ -1,5 +1,5 @@
 <div class="content" style="width: 100%;display: inline-block;">
-    <h2><?php echo $judul;?></h2>
+    <h2>Tambahkan Mata Kuliah Pada Jadwal Yang Anda Buat !</h2>
     <form action="tambahMatkul" method="get">
         <label for="mulai"><strong>Mulai</strong></label>
         <input type="datetime-local" name="mulai" placeholder="YYYY/MM/DD" style="width: 25%; margin-right:2%;">
@@ -35,9 +35,8 @@
                 }
             ?>
         </select><br>
-        <input type="submit" value="Tambahkan" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;">
-        <input type="button" value="Cancel" style="background-color: rgba(240, 6, 6, 0.836);" onclick="cancaled()">
-        <input type="button" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); float:right">
+        <input type="submit" value="Buat Jadwal" style="background-color: rgba(12, 158, 12, 0.87); margin-right:3%;">
+        <input type="button" value="Cancel" style="background-color: rgba(240, 6, 6, 0.836);float:right" onclick="cancaled()">
     </form>
 </div>
 
