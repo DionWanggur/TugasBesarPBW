@@ -1,6 +1,6 @@
 <?php
 	$url = $_SERVER['REDIRECT_URL'];
-	$baseURL = '/TugasPhpPbw/Praktikum/TugasBesar';
+	$baseURL = '/TugasBesarPBW';
 	session_start();
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		switch ($url) {
@@ -58,12 +58,17 @@
 				$controller = new AdminController();
 				echo $controller->tipeUjian();
 				header('Location: buatJadwal');
-				break;
+			break;
 			case $baseURL.'/tambahMatkul':
 				require_once "Controller/adminController.php";
 				$controller = new AdminController();
-				$controller->insertUjian();
-				header('Location: index');
+				$res = $controller->insertUjian();
+				if($res == "berhasil"){
+					header('Location: index');
+				}
+				else{
+					header('Location: buatJadwal');
+				}
 				break;
 			default:
 				echo '404 Not Found';
