@@ -25,6 +25,11 @@
 				$Usrcontroller = new UserController();
 				echo $Usrcontroller->view_liatJadwal();
 			break;
+			case $baseURL.'/jadwalAdmin':
+				require_once "Controller/adminController.php";
+				$AdmController = new AdminController();
+				echo $AdmController->view_liatJadwal();
+			break;
 			case $baseURL.'/downloadJadwal':
 				require_once "Controller/userController.php";
 				$Usrcontroller = new UserController();
@@ -40,6 +45,17 @@
 				$Usrcontroller = new UserController();
 				echo $Usrcontroller->view_UAS();
 			break;
+
+			case $baseURL.'/jadwalUTSAdmin':
+				require_once "Controller/adminController.php";
+				$AdmController = new AdminController();
+				echo $AdmController->view_UTS();
+			break;
+			case $baseURL.'/jadwalUASAdmin':
+				require_once "Controller/adminController.php";
+				$AdmController = new AdminController();
+				echo $AdmController->view_UAS();
+			break;
 			case $baseURL.'/jadwalBaru':
 				require_once "Controller/adminController.php";
 				$AdmController = new AdminController();
@@ -49,12 +65,6 @@
 				require_once "Controller/adminController.php";
 				$AdmController = new AdminController();
 				echo $AdmController->view_buatJadwal();
-			break;
-			case $baseURL.'/tambahMatkul':
-				require_once "Controller/adminController.php";
-				$AdmController = new AdminController();
-				echo $AdmController->tambahMatkul();
-				header('Location: buatJadwal');
 			break;
 			case $baseURL.'/downloadUTS':
 				require_once "Controller/userController.php";
@@ -95,6 +105,12 @@
 				$controller->uploadEksel();
 				header('Location: index');
 			break;
+			case $baseURL.'/deleteBook':
+				require_once "Controller/adminController.php";
+				$roleCtrl = new adminController();
+				$roleCtrl->delete();
+				header('Location: jadwalUTSAdmin');
+				break;
 			default:
 				echo '404 Not Found';
 				break;

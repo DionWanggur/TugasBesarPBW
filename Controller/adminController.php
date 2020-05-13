@@ -4,6 +4,8 @@ require_once "controller/services/mysqlDB.php";
 require_once "Model/matakuliah.php";
 require_once "Model/ruang.php";
 require_once "Model/semester.php";
+require_once 'model/ujian.php';
+
 
 class AdminController{
 	
@@ -33,7 +35,16 @@ class AdminController{
 		}
 	}
 
-	
+	public function view_liatJadwal(){
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
+            $nama = $_SESSION['nama'];
+            if ($_SESSION['kondisi'] == "admin") {
+                $content =  View::createView('liatJadwalAdmin.php',["nama"=>$nama]);
+                return $this->view_index($content);
+			}
+        }
+	}
+
 	public function view_tambahJadwal(){
 		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
 			$nama = $_SESSION['nama'];
@@ -45,6 +56,128 @@ class AdminController{
                 return $this->view_index($content);
             }
         }
+	}
+
+	public function view_UTS(){
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
+            if ($_SESSION['kondisi'] == "admin") {
+				$resUTS = $this->getUTS();
+				$link = $_SESSION['jadwalUTSAdmin'];
+                $content =  View::createView('utsAdmin.php',["resUTS"=>$resUTS,"link"=>$link]);
+                return $this->view_index($content);
+            }
+        }
+	}
+
+	public function view_UAS(){
+		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['nama'])) {
+			if ($_SESSION['kondisi'] == "admin") {
+				$resUAS = $this->getUAS();
+				$link = $_SESSION['jadwalUASAdmin'];
+                $content =  View::createView('uasAdmin.php',["resUAS"=>$resUAS,"link"=>$link]);
+                return $this->view_index($content);
+            }
+        }
+	}
+
+	public function getUTS(){
+		$name = "";
+		$result = [];
+		$query = "
+		SELECT distinct himpA.id,nama, tipe, tata_cara,mulai,selesai,ruang,shift,kebutuhan_pengawas 
+		FROM 
+			(
+			SELECT ujian.id, mengajar.kode, tipe, tata_cara, mulai, selesai, ruang, shift, kebutuhan_pengawas
+			FROM ujian inner join mengajar on ujian.mengajar_id = mengajar.id WHERE tipe LIKE 'UTS'
+			)as himpA inner join matakuliah 
+				on himpA.kode = matakuliah.kode
+			";
+		if(isset($_GET['filter'])){
+			$name = $_GET['filter'];
+			if(isset($name)&&$name!=""){
+				$name = $this->db->escapeString($name);
+				$query .= " WHERE nama LIKE '%$name%'";
+				}
+			}
+			$query .="ORDER BY mulai ASC";
+			$query_result = $this->db->executeSelectQuery($query);
+			$query_result = $this->pagination($query,$name,$query_result,'jadwalUTSAdmin');
+			foreach($query_result as $key => $value){
+				$result[] = new ujian($value['id'],$value['nama'], $value['tipe'],$value['tata_cara'],$value['mulai'], $value['selesai'],$value['ruang'], $value['shift'], $value['kebutuhan_pengawas']);	
+			}
+
+			return $result;
+	}
+
+	public function getUAS(){
+		$name = "";
+		$result = [];
+		$query = "
+		SELECT distinct  himpA.id, nama, tipe, tata_cara,mulai,selesai,ruang,shift,kebutuhan_pengawas 
+		FROM 
+			(
+			SELECT ujian.id, mengajar.kode, tipe, tata_cara, mulai, selesai, ruang, shift, kebutuhan_pengawas 
+			FROM ujian inner join mengajar on ujian.mengajar_id = mengajar.id WHERE tipe LIKE 'UAS'
+			)as himpA inner join matakuliah 
+				on himpA.kode = matakuliah.kode
+			";
+		if(isset($_GET['filter'])){
+			$name = $_GET['filter'];
+			if(isset($name)&&$name!=""){
+				$name = $this->db->escapeString($name);
+				$query .= " WHERE nama LIKE '%$name%'";
+				}
+			}
+			$query .="ORDER BY mulai ASC";
+			$query_result = $this->db->executeSelectQuery($query);
+			$query_result = $this->pagination($query,$name,$query_result,'jadwalUASAdmin');
+			foreach($query_result as $key => $value){
+				$result[] = new ujian(null,$value['nama'], $value['tipe'],$value['tata_cara'],$value['mulai'], $value['selesai'],$value['ruang'], $value['shift'], $value['kebutuhan_pengawas']);	
+			}
+			return $result;
+	}
+
+	public function pagination($query,$name,$query_result,$href)
+	{
+		$name = $name;
+		$href = $href;
+		$query = $query;
+		$linkarr = [];
+		$result = $query_result;
+		$start = 0; $show = 5;
+		$pageCount = count($result) / $show;
+
+		if (isset($_GET['start'])) {
+			$start = $this->db->escapeString($_GET['start']);
+		}
+	
+		$query .= " LIMIT $start, $show";
+
+		$result = $this->db->executeSelectQuery($query);
+
+		if ($pageCount > 1) {
+			for ($i = 0; $i < $pageCount; $i++) {
+				$link = "<a class='pageLink' href ='".$href;
+				if ($name != "") {
+					$link .= "?filter=".$name;
+				}
+				if ($i!=0) {
+					$str = $i * $show;
+					if ($name !="") {
+						$link .= "&";
+					}else{
+						$link .= "?";
+					}
+					$link .= "start=".$str;
+				}
+				$link .= "'>".($i + 1)."</a>";
+
+				array_push($linkarr,$link);
+							
+			}
+		}
+		$_SESSION[$href] = $linkarr;
+		return $result;
 	}
 	
 	public function view_buatJadwal(){
@@ -68,31 +201,6 @@ class AdminController{
 				return $this->view_index($content);
 			}
 		}
-	}
-
-	public function tambahMatkul(){
-		if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['tipeUjian'])) {
-			$mulai = $_GET['mulai'];
-			$selesai = $_GET['selesai'];
-			$mataKuliah = $_GET['mataKuliahUjian'];
-			$tatacara = $_GET['tataCara'];
-			$ruangujian = $_GET['ruang'];
-			$tipeJadwal = $_SESSION['tipeUjian'];
-		}
-	}
-	
-	public function getJadwalBaru()
-	{
-		//untuk database
-		$title = $_GET['sceaduleTitle'];
-		$tipeJadwal = $_GET['tipeUjian'];// lihat M09
-		$jmlHari = $_GET['jumlahHari'];
-		$semester = $_GET['semester'];
-	}
-
-	public function getBuatJadwal()
-	{
-		$hari = $_GET['hariUjian'];
 	}
 
 	public function getAllMataKuliah(){
@@ -214,9 +322,15 @@ class AdminController{
 				}
 			$_SESSION['berhasil']++;
 		}
-}
+	}
 
 	// hapus kembali file .xls yang di upload tadi
 	unlink($_FILES['fileeksel']['name']);
+	}
+
+	public function delete(){ //seharusnya ada validasi isset dan escape string
+		$id = $_POST['ujian_id'];
+		$query = "DELETE FROM ujian WHERE id=".$id;
+		$query_result = $this->db->executeNonSelectQuery($query);
 	}
 }

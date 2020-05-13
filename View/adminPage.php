@@ -4,7 +4,7 @@
     <div class="sidenavContent">
         <a href="tambahJadwal"><i class="fa fa-file" style="font-size:50px;"></i><br><br> Jadwal Baru</a>
         <hr>
-        <a href=""><i class="fa fa fa-book" style="font-size:50px"></i><br><br> Jadwal Ujian</a>
+        <a href="jadwalAdmin"><i class="fa fa fa-book" style="font-size:50px"></i><br><br> Jadwal Ujian</a>
         <hr>
     </div>
 

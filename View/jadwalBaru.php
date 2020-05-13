@@ -7,7 +7,7 @@
             <option value="UAS">UAS</option>
         </select><br>
         <label for="semester"><strong>Semester</strong></label><br>
-        <select name="semester" id="">
+        <select name="semester" id="" required>
             <?php
             foreach ($semester as $key => $row) {
                 echo "<option value = '. $row->jenis.'>" . $row->jenis . " / " . $row->tahunAjar . "</option>";
