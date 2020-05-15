@@ -96,7 +96,9 @@
 					header('Location: index');
 				}
 				else{
-					header('Location: buatJadwal');
+					$message = "Jadwal bentrok";
+					echo "<script type='text/javascript'>alert('$message');</script>";
+					echo "<a href='buatJadwal'>Kembali</a>";
 				}
 				break;
 			case $baseURL.'/fileUpload':
@@ -107,15 +109,20 @@
 					header('Location: index');
 				}
 				else{
-					$message = "Eror :Upload Gagal";
+					$message = "Error :Upload Gagal";
 					echo "<script type='text/javascript'>alert('$message');</script>";
+					echo "<a href='tambahJadwal'>Kembali</a>";
 				}
 			break;
 			case $baseURL.'/deleteBook':
 				require_once "Controller/adminController.php";
 				$roleCtrl = new adminController();
-				$roleCtrl->delete();
-				header('Location: jadwalUTSAdmin');
+				$lokasi = $roleCtrl->delete();
+				if ($lokasi =='UTS') {
+					header('Location: jadwalUTSAdmin');
+				} else {
+					header('Location: jadwalUASAdmin');
+				}
 				break;
 			default:
 				echo '404 Not Found';

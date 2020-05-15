@@ -132,7 +132,7 @@ class AdminController{
 			$query_result = $this->db->executeSelectQuery($query);
 			$query_result = $this->pagination($query,$name,$query_result,'jadwalUASAdmin');
 			foreach($query_result as $key => $value){
-				$result[] = new ujian(null,$value['nama'], $value['tipe'],$value['tata_cara'],$value['mulai'], $value['selesai'],$value['ruang'], $value['shift'], $value['kebutuhan_pengawas']);	
+				$result[] = new ujian($value['id'],$value['nama'], $value['tipe'],$value['tata_cara'],$value['mulai'], $value['selesai'],$value['ruang'], $value['shift'], $value['kebutuhan_pengawas']);	
 			}
 			return $result;
 	}
@@ -183,6 +183,7 @@ class AdminController{
 	public function view_buatJadwal(){
 		if (isset($_GET['tipeUjian']) && $_GET['tipeUjian'] != "") {
 			$_SESSION['tipeUjian'] = $_GET['tipeUjian'];
+			$_SESSION['semesterId'] = $_GET['semester'];
 		}
 		$matkul = $this->getAllMataKuliah();
 		$ruang = $this->getAllRuang();
@@ -204,7 +205,17 @@ class AdminController{
 	}
 
 	public function getAllMataKuliah(){
-		$query = "SELECT nama FROM matakuliah ";
+		$semesterId = $_SESSION['semesterId'];
+		$query = " 
+		SELECT kuliahMengajar.nama
+		FROM (
+			SELECT nama, semester_id 
+			FROM matakuliah JOIN mengajar on matakuliah.kode = mengajar.kode
+			GROUP BY nama, semester_id
+			)as kuliahMengajar JOIN semester on kuliahMengajar.semester_id = semester.id
+		WHERE kuliahMengajar.semester_id = '$semesterId'
+		ORDER BY kuliahMengajar.nama ASC
+		";
 		$query_result = $this->db->executeSelectQuery($query);
 		$result = [];
 		foreach ($query_result as $key => $value) {
@@ -229,9 +240,7 @@ class AdminController{
 		$query_result = $this->db->executeSelectQuery($query);
 		$result = [];
 		foreach ($query_result as $key => $value) {
-			if ($value['berjalan'] == 1) {
-				$result[] = new Semester($value['jenis'],$value['tahun_ajar']);
-			}
+			$result[] = new Semester($value['id'],$value['jenis'],$value['tahun_ajar']);
 		}
 		return $result;
 	}
@@ -254,7 +263,7 @@ class AdminController{
 		$status = "";
 
 
-		$queryCek = "SELECT ruang FROM ujian WHERE ruang LIKE '$ruang' AND mulai LIKE '$resMulai' AND selesai LIKE '$resSelesai'";
+		$queryCek = "SELECT ruang FROM ujian WHERE ruang LIKE '$ruang' AND mulai LIKE '$resMulai' AND selesai LIKE '$resSelesai' AND tipe LIKE '$tipe'";
 		$queryCek_result = $this->db->executeSelectQuery($queryCek);
 		if($queryCek_result[0]['ruang']==null){
 			$query = "SELECT mengajar.id FROM matakuliah inner join mengajar on matakuliah.kode = mengajar.kode WHERE matakuliah.nama LIKE '$matkul'";
@@ -317,7 +326,7 @@ class AdminController{
 					foreach($query_result as $key => $value){
 						$id = $value['id'];
 						$queryInsert = "INSERT INTO ujian (mengajar_id,tipe,tata_cara,mulai,selesai,ruang,shift,kebutuhan_pengawas) 
-							values ('$id','$tipe','$tatacara','$resMulai','$resSelesai','$ruang','$shift','$jumPengawas')";
+							values ('$id','$tipe','$tatacara','$mulaiai','$selesaiai','$ruang','$shift','$jumPengawas')";
 						$queryInsert_result = $this->db->executeNonSelectQuery($queryInsert);
 					}
 				$_SESSION['berhasil']++;
@@ -335,9 +344,17 @@ class AdminController{
 		}
 	}
 
-	public function delete(){ //seharusnya ada validasi isset dan escape string
+	public function delete(){ 
 		$id = $_POST['ujian_id'];
+		$tipe = "";
+		$query1 = "SELECT tipe FROM ujian WHERE id=".$id;
+		$query1_result = $this->db->executeSelectQuery($query1);
+		foreach($query1_result as $key => $value){
+			$tipe = $value['tipe'];
+		}
 		$query = "DELETE FROM ujian WHERE id=".$id;
 		$query_result = $this->db->executeNonSelectQuery($query);
+
+		return $tipe;
 	}
 }

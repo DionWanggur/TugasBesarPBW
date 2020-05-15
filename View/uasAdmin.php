@@ -1,4 +1,4 @@
-<form method="GET" action="jadwalUAS" style="margin-bottom: 2%;">
+<form method="GET" action="jadwalUASAdmin" style="margin-bottom: 2%;">
     <legend>Search by Mata Kuliah</legend>
     <input type="text" name="filter" value="" style="width: 40%">
     <input type="submit" value="SEARCH">

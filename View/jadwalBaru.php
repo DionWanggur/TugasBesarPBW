@@ -10,7 +10,7 @@
         <select name="semester" id="" required>
             <?php
             foreach ($semester as $key => $row) {
-                echo "<option value = '. $row->jenis.'>" . $row->jenis . " / " . $row->tahunAjar . "</option>";
+                echo "<option value = '$row->id'>" . $row->jenis . " / " . $row->tahunAjar . "</option>";
             }
             ?>
         </select><br>
